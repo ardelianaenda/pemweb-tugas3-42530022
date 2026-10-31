@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<%- include('../partials/header') %>
+<body>
+  <div class="page">
+
+    <%- include('../partials/navbar') %>
+
+    <main class="detail">
+      <a href="/katalog" class="kembali">&larr; Kembali ke katalog</a>
+
+      <div class="detail-grid">
+        <div class="detail-foto">
+          <img src="/img/<%= item.gambar %>" alt="<%= item.nama_menu %>">
+        </div>
+        <div class="detail-info">
+          <span class="label"><%= item.kategori %></span>
+          <h1><%= item.nama_menu %></h1>
+          <p class="detail-harga">Rp <%= item.harga.toLocaleString('id-ID') %></p>
+          <p class="detail-deskripsi"><%= item.deskripsi %></p>
+          <div class="aksi-detail">
+            <a href="/katalog/edit/<%= item.id %>" class="btn">Edit Menu</a>
+
+            <form method="POST" action="/katalog/hapus/<%= item.id %>"
+              onsubmit="return confirm('Yakin ingin menghapus menu ini? Tindakan ini tidak bisa dibatalkan.')">
+              <button type="submit" class="btn btn-bahaya">Hapus</button>
+            </form>
+            <a href="/katalog" class="btn btn-garis">Kembali</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <%- include('../partials/footer') %>
+
+  </div>
+</body>
+</html>

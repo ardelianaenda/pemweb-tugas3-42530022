@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<%- include('../partials/header') %>
+<body>
+  <div class="page">
+
+    <%- include('../partials/navbar') %>
+
+    <section class="page-head">
+      <h1>Tentang Flora Coffee</h1>
+      <p>Kami menyajikan <%= jumlahMenu %> menu pilihan, dari kopi, minuman segar, hingga hidangan ringan untuk menemani harimu.</p>
+    </section>
+
+    <section class="about-teks">
+      <p>Flora Coffee lahir dari kesukaan sederhana: secangkir kopi yang enak di tempat yang nyaman. Kami percaya rasa terbaik datang dari bahan yang segar dan proses yang dikerjakan dengan sabar.</p>
+    </section>
+
+    <section class="nilai-grid">
+      <% nilai.forEach(function (n) { %>
+        <div class="nilai">
+          <h3><%= n.judul %></h3>
+          <p><%= n.isi %></p>
+        </div>
+      <% }) %>
+    </section>
+
+    <%- include('../partials/footer') %>
+
+  </div>
+</body>
+</html>

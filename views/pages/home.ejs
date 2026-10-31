@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<%- include('../partials/header') %>
+<body>
+  <div class="page">
+
+    <%- include('../partials/navbar') %>
+
+    <header class="hero">
+      <h1>Start your day<br>with real coffee</h1>
+      <p>Biji kopi segar diseduh setiap hari untuk rasa yang halus dan kaya. Teman pagi yang sibuk dan jeda singkat yang menyenangkan.</p>
+    </header>
+
+<% if (sorotan.length >= 3) { %>
+    <section class="strip">
+      <div class="strip-item">
+        <img src="/img/<%= sorotan[0].gambar %>" alt="<%= sorotan[0].nama_menu %>">
+      </div>
+      <div class="strip-item strip-quote">
+        <p>Setiap cangkir dibuat untuk membangunkanmu, menghangatkanmu, dan menemani harimu.</p>
+      </div>
+      <div class="strip-item">
+        <img src="/img/<%= sorotan[1].gambar %>" alt="<%= sorotan[1].nama_menu %>">
+      </div>
+      <div class="strip-item">
+        <img src="/img/<%= sorotan[2].gambar %>" alt="<%= sorotan[2].nama_menu %>">
+      </div>
+    </section>
+<% } %>
+    <section class="seksi">
+      <div class="seksi-judul">
+        <h2>Menu Andalan</h2>
+        <a href="/katalog" class="tautan">Lihat semua menu &rarr;</a>
+      </div>
+      <div class="grid">
+        <% andalan.forEach(function (item) { %>
+          <a href="/katalog/<%= item.id %>" class="kartu">
+            <img src="/img/<%= item.gambar %>" alt="<%= item.nama_menu %>">
+            <div class="kartu-isi">
+              <span class="label"><%= item.kategori %></span>
+              <h3><%= item.nama_menu %></h3>
+              <p class="harga">Rp <%= item.harga.toLocaleString('id-ID') %></p>
+            </div>
+          </a>
+        <% }) %>
+      </div>
+    </section>
+
+    <%- include('../partials/footer') %>
+
+  </div>
+</body>
+</html>

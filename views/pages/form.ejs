@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<%- include('../partials/header') %>
+<body>
+  <div class="page">
+
+    <%- include('../partials/navbar') %>
+
+    <section class="page-head">
+      <h1><%= mode === 'tambah' ? 'Tambah Menu' : 'Edit Menu' %></h1>
+      <p>Isi data menu dengan lengkap. Nama file gambar harus sudah ada di folder <strong>public/img</strong>.</p>
+    </section>
+
+    <section class="kontak-wrap">
+      <% if (errors.length > 0) { %>
+        <div class="alert alert-error">
+          <ul>
+            <% errors.forEach(function (e) { %>
+              <li><%= e %></li>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+
+      <form class="form" method="POST" action="<%= action %>" enctype="multipart/form-data" novalidate>
+        <div>
+          <label for="nama_menu">Nama Menu</label>
+          <input type="text" id="nama_menu" name="nama_menu" value="<%= input.nama_menu %>">
+        </div>
+
+        <div>
+          <label for="kategori">Kategori</label>
+          <select id="kategori" name="kategori">
+            <option value="">-- Pilih kategori --</option>
+            <% daftarKategori.forEach(function (k) { %>
+              <option value="<%= k.kunci %>" <%= input.kategori === k.kunci ? 'selected' : '' %>><%= k.label %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div>
+          <label for="harga">Harga (Rp)</label>
+          <input type="text" id="harga" name="harga" inputmode="numeric" value="<%= input.harga %>">
+        </div>
+
+        <div>
+             <label for="deskripsi">Deskripsi</label>
+             <textarea id="deskripsi" name="deskripsi"><%= input.deskripsi %></textarea>
+        </div>
+
+        <div>
+  <label for="gambar">Foto Menu</label>
+  <% if (mode === 'edit' && gambarSaatIni) { %>
+    <img src="/img/<%= gambarSaatIni %>" class="preview" alt="Gambar saat ini">
+    <small class="petunjuk">Gambar saat ini. Pilih file baru hanya jika ingin menggantinya.</small>
+  <% } %>
+
+  <input type="file" id="gambar" name="gambar" accept="image/jpeg,image/png,image/webp,image/gif">
+  <small class="petunjuk">
+    <%= mode === 'edit' ? 'Kosongkan jika tidak ingin mengganti gambar.' : 'Kosongkan untuk memakai gambar bawaan.' %>
+    Format JPG, PNG, WEBP, atau GIF. Maksimal 2 MB.
+  </small>
+  <img id="preview" class="preview" alt="Pratinjau gambar baru" hidden>
+</div>
+
+        <div class="form-aksi">
+         <button type="submit" class="btn">Simpan</button>
+         <a href="/katalog" class="btn btn-garis">Batal</a>
+        </div>
+      </form>
+    </section>
+<script>
+  const inputGambar = document.getElementById("gambar");
+  const preview = document.getElementById("preview");
+  inputGambar.addEventListener("change", function () {
+    const file = inputGambar.files[0];
+    if (file) {
+      preview.src = URL.createObjectURL(file);
+      preview.hidden = false;
+    } else {
+      preview.hidden = true;
+    }
+  });
+</script>
+
+    <%- include('../partials/footer') %>
+
+  </div>
+</body>
+</html>

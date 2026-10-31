@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<%- include('../partials/header') %>
+<body>
+  <div class="page">
+
+    <%- include('../partials/navbar') %>
+
+    <section class="page-head">
+        <h1>Katalog Menu</h1>
+        <p>Pilih kategori untuk menyaring menu, atau klik kartu untuk melihat detailnya.</p>
+        <a href="/katalog/tambah" class="btn">+ Tambah Menu</a>
+    </section>
+
+    <section class="menu" id="menu">
+    <% if (pesan) { %>
+        <div class="alert alert-sukses"><%= pesan %></div>
+    <% } %>
+      <div class="filter">
+        <a href="/katalog" class="chip <%= kategoriAktif === 'semua' ? 'aktif' : '' %>">Semua</a>
+        <% daftarKategori.forEach(function (k) { %>
+          <a href="/katalog?kategori=<%= k.kunci %>"
+             class="chip <%= kategoriAktif === k.kunci ? 'aktif' : '' %>"><%= k.label %></a>
+        <% }) %>
+      </div>
+
+      <% if (daftarMenu.length === 0) { %>
+        <p class="kosong">Belum ada menu untuk kategori ini.</p>
+      <% } else { %>
+        <div class="grid">
+          <% daftarMenu.forEach(function (item) { %>
+            <a href="/katalog/<%= item.id %>" class="kartu">
+              <img src="/img/<%= item.gambar %>" alt="<%= item.nama_menu %>">
+              <div class="kartu-isi">
+                <span class="label"><%= item.kategori %></span>
+                <h3><%= item.nama_menu %></h3>
+                <p class="harga">Rp <%= item.harga.toLocaleString('id-ID') %></p>
+              </div>
+            </a>
+          <% }) %>
+        </div>
+      <% } %>
+    </section>
+
+    <%- include('../partials/footer') %>
+
+  </div>
+</body>
+</html>
