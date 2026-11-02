@@ -11,7 +11,7 @@ Aplikasi web CRUD menu kafe dengan **Node.js, Express, EJS, dan MySQL**. Koneksi
 
 ## Video Penjelasan
 
-[Link video YouTube akan ditambahkan di sini]
+[https://youtu.be/LoQyKW7APYc?si=TV4aalReZdqhfDR8]
 
 ## Fitur
 
